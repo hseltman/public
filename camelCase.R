@@ -13,7 +13,7 @@
 camelCase = function(sv, upper=FALSE, capIsNew=FALSE, alreadyTrimmed=FALSE) {
   if (!is.character(sv)) stop("'sv' must be a string vector")
   if (!alreadyTrimmed) sv = gsub("[[:space:]]*$", "", gsub("^[[:space:]]*", "", sv))
-  if (capIsNew)   if (capIsNew) {
+  if (capIsNew) {
     sv = gsub("([A-Z])", " \\1", sv)
     sv = gsub("^[[:space:]]", "", sv)
     sv = tolower(sv)
