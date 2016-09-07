@@ -49,7 +49,7 @@ readCsv = function(fname, dir=NULL, maxCatToFactor=5, ...) {
   }
   
   # Fix-up leading and trailing blanks and convert "" to NA
-  charCol = apply(dtf,  MARGIN=2, is.character)
+  charCol = sapply(dtf,  is.character)
   if (any(charCol)) {
     for (ii in which(charCol)) {
       dtf[, ii] = trimws(dtf[, ii])
