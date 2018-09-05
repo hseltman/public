@@ -1,18 +1,24 @@
-# Howard Seltman, July 2016
-# Function to make camel case from a string vector
-# Result is like https://en.wikipedia.org/wiki/CamelCase.
-# Spaces or punctuation (e.g., "." or "_") are dropped and the next character is made upper case.
-# The first character is always lower case.
+# camelCase.R
+# Howard Seltman, Sept. 2018
+#
+# A function to make camel case from a string vector
+# The result is like https://en.wikipedia.org/wiki/CamelCase.
+# Spaces or punctuation (e.g., "." or "_") are dropped and the next character
+# is made upper case.
+# The first character is lower case by default.
 
 # Arguments:
 #  sv: a string vector with spaces or punctuation between words
-#  upper: default to FALSE; TRUE makes first work upper case, too
-# Output:
+#  upper: default to FALSE; TRUE makes first word upper case, too
+#  capIsNew: TRUE makes capital letters inside of words indicate
+#    a new word, and so remain upper case
+#  alreadyTrimmed: TRUE suppresses initial trimming of the text
+# Value:
 #  a string vector in camelcase
 #
 camelCase = function(sv, upper=FALSE, capIsNew=FALSE, alreadyTrimmed=FALSE) {
   if (!is.character(sv)) stop("'sv' must be a string vector")
-  if (!alreadyTrimmed) sv = gsub("[[:space:]]*$", "", gsub("^[[:space:]]*", "", sv))
+  if (!alreadyTrimmed) sv = trimws(sv)
   if (capIsNew) {
     sv = gsub("([A-Z])", " \\1", sv)
     sv = gsub("^[[:space:]]", "", sv)
